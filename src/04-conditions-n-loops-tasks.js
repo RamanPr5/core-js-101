@@ -27,8 +27,12 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 !== 0 && num % 5 !== 0) return num;
+  if (num % 3 === 0 && num % 5 !== 0) return 'Fizz';
+  if (num % 5 === 0 && num % 3 !== 0) return 'Buzz';
+  if (num % 5 === 0 && num % 3 === 0) return 'FizzBuzz';
+  return num;
 }
 
 
@@ -43,8 +47,18 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let answer = 1;
+  if (n === 0 || n === 1) {
+    return answer;
+  }
+  if (n > 1) {
+    for (let i = n; i >= 1; i -= 1) {
+      answer *= i;
+    }
+    return answer;
+  }
+  return answer;
 }
 
 
@@ -60,8 +74,12 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let sum = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    sum += i;
+  }
+  return sum;
 }
 
 
@@ -294,8 +312,21 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const open = ['[', '{', '(', '<'];
+  const close = [']', '}', ')', '>'];
+  if (str === '') return true;
+  for (let i = 0; i < str.length; i += 1) {
+    if (open.includes(str[i])) {
+      stack.push(str[i]);
+    } else if (close.indexOf(str[i]) === open.indexOf(stack[stack.length - 1])) {
+      stack.pop();
+    } else {
+      return false;
+    }
+  }
+  return stack.length === 0;
 }
 
 
